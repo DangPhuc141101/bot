@@ -23,15 +23,17 @@ def GetQuestion( url ):
     random.shuffle(listAnswer)
 
     # format text answer
+    newListAnswer =[]
     for ans in listAnswer:
         ans= format_text(str(ans))
-
+        newListAnswer.append(ans)
+    print("list ans", listAnswer)
     return {
         'category':question['category'],
         'typeQuestion':question['difficulty'],
         'question' : format_text(str(question['question'])),
         'correct_answer': question['correct_answer'], 
-        'listAnswer' : listAnswer,
+        'listAnswer' : newListAnswer,
     }
 
 #GetQuestion('https://opentdb.com/api.php?amount=1&category=9&type=multiple')

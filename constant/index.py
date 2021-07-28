@@ -10,7 +10,7 @@ typeOfQuestion = [
                   {'value': "28", 'text': "Vehicles"},
                   ]
 
-tokenBot=''
+tokenBot='1925778744:AAFF-rxTGyuWArGsHKzhyhF2ATB8w4rr92s'
 
 FIRST, SECOND, THIRD, FOURTH = range(4)
 # Callback data

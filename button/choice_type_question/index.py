@@ -118,7 +118,7 @@ def choice_type_five(update: Update, context: CallbackContext) -> int:
     editTypeAddDifficulty(teleId, '24', '')
 
     keyboard = create_button_type_question()
-    reply_markup = InlineKeyboardMarkup(keyboard)
+    reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
         text="You choiced Politics", reply_markup=reply_markup
     )
