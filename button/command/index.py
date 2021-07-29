@@ -1,16 +1,15 @@
 from index import*
 import logging
-import requests
 from  helper.Index_correct import*
 from helper.getDataApi import*
 from helper.index import*
+from constant.index import*
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (
-    Updater,
-    CommandHandler,
-    CallbackQueryHandler,
+
     ConversationHandler,
     CallbackContext,
+    CallbackQueryHandler
 )
 
 
@@ -21,12 +20,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-# Stages
-FIRST, SECOND, THIRD = range(3)
-# Callback data
-ONE, TWO, THREE, FOUR = range(4)
 
-answer = {0: 'A', 1: 'B', 2: 'C', 3: 'D'}
 
 def start(update: Update, context: CallbackContext) -> int:
     """Send message on `/start`."""
@@ -42,16 +36,26 @@ def start(update: Update, context: CallbackContext) -> int:
 
     keyboard = [
         [
-            InlineKeyboardButton("chọn độ khó", callback_data=str(ONE)),
-            InlineKeyboardButton("chọn loại câu hỏi", callback_data=str(TWO)),
+            InlineKeyboardButton("choose level", callback_data=str(ONE)),
+            InlineKeyboardButton("choose type of question", callback_data=str(TWO)),
+        ],
+        [ 
             InlineKeyboardButton("Start now", callback_data=str(THREE)),
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     # Send message with text and appended InlineKeyboard
-    update.message.reply_text("Start handler, Choose a route", reply_markup=reply_markup)
+    Uname=update.message.chat.last_name
+    update.message.reply_text("🌈🌈🌈Welcome "+Uname+" to english bot🌈🌈🌈"\
+        +"\n✨ /help to show instruction"\
+        +"\n🎫 /info to show test information",reply_markup=reply_markup)
     # Tell ConversationHandler that we're in state `FIRST` now
     return FIRST
+
+# def start1(update: Update, context: CallbackContext) -> int:
+#     CallbackQueryHandler(startNow)
+#     print("something")
+    
 
 def startNow(update: Update, context: CallbackContext) -> int:
     query = update.callback_query
@@ -81,9 +85,9 @@ def startNow(update: Update, context: CallbackContext) -> int:
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     editCorrectAnswerById(teleId,answer[index_corect(question['listAnswer'], question['correct_answer'])])
-
+    question_bold="*"+question['question']+"*"
     query.edit_message_text(
-        text=question['question'], reply_markup=reply_markup
+        text=question_bold,parse_mode="Markdown", reply_markup=reply_markup
     )
 
     return THIRD
@@ -99,8 +103,8 @@ def start_over(update: Update, context: CallbackContext) -> int:
     query.answer()
     keyboard = [
         [
-            InlineKeyboardButton("chọn độ khó", callback_data=str(ONE)),
-            InlineKeyboardButton("chọn loại câu hỏi", callback_data=str(TWO)),
+            InlineKeyboardButton("chosse level", callback_data=str(ONE)),
+            InlineKeyboardButton("chosse type of question", callback_data=str(TWO)),
             InlineKeyboardButton("Start now", callback_data=str(THREE)),
         ]
     ]
@@ -123,3 +127,32 @@ def end(update: Update, context: CallbackContext) -> int:
     query.answer()
     query.edit_message_text(text="See you next time!")
     return ConversationHandler.END
+
+def help(update: Update, context: CallbackContext) -> int:
+    Uname=update.message.chat.full_name
+    update.message.reply_text("🌈🌈🌈Welcome "+Uname+" to english bot🌈🌈🌈\
+    \n✨/start to set up and start the test\
+    \n✨/info to show your test information"\
+    +"\n✨/help to show instuction")
+
+    
+def information(update: Update, context: CallbackContext) -> int:
+    
+    user = update.message.from_user
+    teleId=user.id
+    checkUser=findUserById(teleId)
+    if(checkUser==-1):
+        createUser(teleId)
+    users=getUserById(teleId)
+    Uname=update.message.chat.full_name
+    typeOfques=users['type_question']
+    nameOfType=findTypeOfQuestion(typeOfques)
+    update.message.reply_text("🤵Your telegram id is: "+str(users['id_tele'])+\
+    "\n💖Your name is: "+Uname+\
+    "\n🏆Your total question is: "+str(users['totalQuestion'])\
+    +"\n🥇Your total correct answer is: "+str(users['totalTrue'])+\
+    "\n💔Your total incorrect answer is: "+str(users['totalQuestion']-users['totalTrue'])\
+    +"\n🚀Your current type of question: "+str(nameOfType)\
+    +"\n✈Your level is: "+str(users['difficulty']))
+
+#"totalTrue": 44, "totalQuestion": 195, "type_question": "27", "difficulty": "medium"

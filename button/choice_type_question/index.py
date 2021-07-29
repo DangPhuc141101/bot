@@ -29,8 +29,10 @@ keyboard_type_question = create_button_type_question()
 def create_button_option():
     keyboard = [
         [
-            InlineKeyboardButton("chọn độ khó", callback_data=str(ONE)),
-            InlineKeyboardButton("chọn loại câu hỏi", callback_data=str(TWO)),
+            InlineKeyboardButton("choose level", callback_data=str(ONE)),
+            InlineKeyboardButton("choose type of question", callback_data=str(TWO)),
+        ],
+        [
             InlineKeyboardButton("Start now", callback_data=str(THREE)),
         ]
     ]
@@ -46,7 +48,7 @@ def choice_type_question(update: Update, context: CallbackContext) -> int:
 
     reply_markup = InlineKeyboardMarkup(keyboard_type_question)
     query.edit_message_text(
-        text="Choice type question", reply_markup=reply_markup
+        text="choose type question", reply_markup=reply_markup
     )
     return FOURTH
 
@@ -61,7 +63,7 @@ def choice_type_one(update: Update, context: CallbackContext) -> int:
     reply_markup = InlineKeyboardMarkup(keyboard_option)
 
     query.edit_message_text(
-        text="You choiced Mythology", reply_markup=reply_markup
+        text="you have choosen Mythology", reply_markup=reply_markup
     )
 
     return FIRST
@@ -77,7 +79,7 @@ def choice_type_two(update: Update, context: CallbackContext) -> int:
     keyboard = create_button_type_question()
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="You choiced Sports", reply_markup=reply_markup
+        text="you have choosen Sports", reply_markup=reply_markup
     )
     return FIRST
 
@@ -91,7 +93,7 @@ def choice_type_three(update: Update, context: CallbackContext) -> int:
 
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="You choiced Geography", reply_markup=reply_markup
+        text="you have choosen Geography", reply_markup=reply_markup
     )
     return FIRST
 
@@ -105,7 +107,7 @@ def choice_type_four(update: Update, context: CallbackContext) -> int:
 
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="You choiced History", reply_markup=reply_markup
+        text="you have choosen History", reply_markup=reply_markup
     )
     return FIRST
 
@@ -120,7 +122,7 @@ def choice_type_five(update: Update, context: CallbackContext) -> int:
     keyboard = create_button_type_question()
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="You choiced Politics", reply_markup=reply_markup
+        text="you have choosen Politics", reply_markup=reply_markup
     )
     return FIRST
 
@@ -134,7 +136,7 @@ def choice_type_six(update: Update, context: CallbackContext) -> int:
 
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="You choiced Art", reply_markup=reply_markup
+        text="you have choosen Art", reply_markup=reply_markup
     )
     return FIRST
 
@@ -148,7 +150,7 @@ def choice_type_seven(update: Update, context: CallbackContext) -> int:
 
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="You Choiced Celebrities", reply_markup=reply_markup
+        text="you have choosen Celebrities", reply_markup=reply_markup
     )
     return FIRST
 
@@ -162,7 +164,7 @@ def choice_type_eight(update: Update, context: CallbackContext) -> int:
 
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="You choiced Animals", reply_markup=reply_markup
+        text="you have choosen Animals", reply_markup=reply_markup
     )
     return FIRST
 
@@ -176,7 +178,7 @@ def choice_type_nine(update: Update, context: CallbackContext) -> int:
 
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="You choiced Vehicles", reply_markup=reply_markup
+        text="you have choosen Vehicles", reply_markup=reply_markup
     )
     return FIRST
 
@@ -188,6 +190,6 @@ def choice_back_menu(update: Update, context: CallbackContext) -> int:
     print(getUserById(teleId))
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="You choiced back to menu", reply_markup=reply_markup
+        text="you have choosen back to menu", reply_markup=reply_markup
     )
     return FIRST

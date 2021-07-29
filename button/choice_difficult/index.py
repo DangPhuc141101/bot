@@ -1,26 +1,22 @@
 from index import*
-import logging
-import requests
-from  helper.Index_correct import*
+from helper.Index_correct import*
 from helper.getDataApi import*
 from constant.index import*
 from helper.index import*
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (
-    Updater,
-    CommandHandler,
-    CallbackQueryHandler,
-    ConversationHandler,
+   
     CallbackContext,
 )
-# Stages
 
 # create button option
 def create_button_option():
     keyboard = [
         [
-            InlineKeyboardButton("chọn độ khó", callback_data=str(ONE)),
-            InlineKeyboardButton("chọn loại câu hỏi", callback_data=str(TWO)),
+            InlineKeyboardButton("choose level", callback_data=str(ONE)),
+            InlineKeyboardButton("choose type of question", callback_data=str(TWO)),
+        ],
+        [
             InlineKeyboardButton("Start now", callback_data=str(THREE)),
         ]
     ]
@@ -34,15 +30,15 @@ def choice_level(update: Update, context: CallbackContext) -> int:
 
     keyboard = [
         [
-            InlineKeyboardButton("dễ ", callback_data=str(ONE)),
-            InlineKeyboardButton(" vừa ", callback_data=str(TWO)),
-            InlineKeyboardButton("khó", callback_data=str(THREE)),
+            InlineKeyboardButton("easy", callback_data=str(ONE)),
+            InlineKeyboardButton("medium", callback_data=str(TWO)),
+            InlineKeyboardButton("difficult", callback_data=str(THREE)),
             InlineKeyboardButton("random", callback_data=str(FOUR)),
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     query.edit_message_text(
-        text=" mời bạn chọn độ khó", reply_markup=reply_markup
+        text="please choose level", reply_markup=reply_markup
     )
     return SECOND
 
@@ -60,7 +56,7 @@ def easy(update: Update, context: CallbackContext) -> int:
 
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="Bạn chọn dễ ", reply_markup=reply_markup
+        text="you have choosen easy", reply_markup=reply_markup
     )
     return FIRST
 
@@ -76,7 +72,7 @@ def medium(update: Update, context: CallbackContext) -> int:
 
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="Bạn chọn vừa", reply_markup=reply_markup
+        text="you have chossen medium", reply_markup=reply_markup
     )
 
     return FIRST
@@ -93,7 +89,7 @@ def difficult(update: Update, context: CallbackContext) -> int:
 
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="bạn chọn khso ", reply_markup=reply_markup
+        text="you have chossen difficult", reply_markup=reply_markup
     )
     return FIRST
 
@@ -109,6 +105,6 @@ def randomDifficult(update: Update, context: CallbackContext) -> int:
 
     reply_markup = InlineKeyboardMarkup(keyboard_option)
     query.edit_message_text(
-        text="bạn chọn random", reply_markup=reply_markup
+        text="you have choosen random", reply_markup=reply_markup
     )
     return FIRST

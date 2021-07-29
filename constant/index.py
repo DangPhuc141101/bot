@@ -1,5 +1,5 @@
 typeOfQuestion = [
-                  {'value': "20", 'text': "Mythology"},
+                  {'value': "20", 'text': "Mythology"},#typeOfQuestion[0]['text']
                   {'value': "21", 'text': "Sports"},
                   {'value': "22", 'text': "Geography"},
                   {'value': "23", 'text': "History"},
@@ -17,3 +17,4 @@ FIRST, SECOND, THIRD, FOURTH = range(4)
 ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE = range(9)
 
 answer = {0: 'A', 1: 'B', 2: 'C', 3: 'D'}
+

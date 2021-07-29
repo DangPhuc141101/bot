@@ -1,3 +1,4 @@
+
 import logging
 import requests
 from  helper.Index_correct import*
@@ -59,6 +60,9 @@ def main() -> None:
 
     # Add ConversationHandler to dispatcher that will be used for handling updates
     dispatcher.add_handler(conv_handler)
+    dispatcher.add_handler(CommandHandler('help', help))
+    dispatcher.add_handler(CommandHandler('info', information))
+   
 
     # Start the Bot
     updater.start_polling()

@@ -1,4 +1,5 @@
 import json
+from constant.index import*
 
 def readData():
     with open("dataBase.json") as jsonFile:
@@ -37,7 +38,7 @@ def createUser(id):
         "id_tele": id,
         "totalTrue": 0,
         "totalQuestion": 0,
-        "type_question": 9,
+        "type_question": 27,
         "difficulty": "multiple",
         "correct_answer":"A"
     })
@@ -127,3 +128,17 @@ def makeAnewUrlQuestion(typeOfQuestion , difficulty):
     newUrl = ''
     newUrl = baseUrl + '&category=' + str(typeOfQuestion) + '&difficulty=' + str(difficulty)
     return newUrl
+
+def getInformationById(id):
+    users = readData()
+    indexUser = -1
+    
+    for i in range(len(users)):
+        if users[i]['id_tele'] == id:
+            return users[i]
+
+def findTypeOfQuestion(type):
+    for i in typeOfQuestion:
+        if int(i['value'])==int(type):
+            return i['text']
+     
