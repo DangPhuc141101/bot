@@ -1,6 +1,6 @@
   
 import telegram
-from index import*
+from main import*
 from button.choice_difficult.index import*
 from  helper.Index_correct import*
 from helper.getDataApi import*

@@ -1,4 +1,4 @@
-from index import*
+from main import*
 import logging
 from  helper.Index_correct import*
 from helper.getDataApi import*
